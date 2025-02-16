@@ -19,6 +19,7 @@ import {
 import { useToast } from "@/hooks/use-toast";
 import axios from "axios";
 import { Loader2, Plus, Share } from "lucide-react";
+import moment from "moment";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -189,11 +190,14 @@ export default function PollsPage() {
                 className="cursor-pointer hover:shadow-lg transition"
               >
                 <CardContent
-                  className="p-4 flex items-center justify-between"
+                  className="p-4 flex flex-col md:flex-row gap-y-5 md:gap-y-0 items-start md:items-center justify-start md:justify-between"
                   onClick={() => router.push(`/poll/${poll.id}`)}
                 >
                   {/* 📝 Left Side - Poll Details */}
                   <div className="flex-1">
+                    <span className="text-gray-400 text-xs font-medium">
+                      {moment(poll.created_at).fromNow()}
+                    </span>
                     <h3 className="text-lg font-semibold truncate max-w-xs">
                       <Tooltip>
                         <TooltipTrigger asChild>
@@ -216,7 +220,7 @@ export default function PollsPage() {
                   </div>
 
                   {/* 📊 Right Side - Stats & Share */}
-                  <div className="flex items-center gap-6">
+                  <div className="flex justify-between md:justify-end w-full items-center gap-6">
                     <div className="text-right">
                       <p className="text-sm text-gray-500">Votes</p>
                       <p className="text-lg font-semibold">
