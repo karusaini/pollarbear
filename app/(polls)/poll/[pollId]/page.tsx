@@ -1,14 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useRouter, useParams } from "next/navigation";
-import { use } from "react";
-import axios from "axios";
-import moment from "moment";
 import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Loader2, RefreshCcw, Share, Share2 } from "lucide-react";
-import { useToast } from "@/hooks/use-toast"; // ✅ Import ShadCN toast
+import { useToast } from "@/hooks/use-toast";
+import axios from "axios";
+import { Loader2, RefreshCcw, Share } from "lucide-react";
+import moment from "moment";
+import { use, useEffect, useState } from "react";
 
 interface PollOption {
   id: number;
@@ -33,7 +30,7 @@ export default function PollPage({
   params: Promise<{ pollId: string }>;
 }) {
   const { pollId } = use(params);
-  const { toast } = useToast(); // ✅ ShadCN toast hook
+  const { toast } = useToast();
   const [poll, setPoll] = useState<PollData | null>(null);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
@@ -43,7 +40,7 @@ export default function PollPage({
 
   const pollUrl = typeof window !== "undefined" ? window.location.href : "";
 
-  // ✅ Fetch poll data (with optional view registration)
+  // s Fetch poll data (with optional view registration)
   const fetchPoll = async (registerView: boolean = false): Promise<void> => {
     try {
       setRefreshing(true);
@@ -93,7 +90,7 @@ export default function PollPage({
     }
   };
 
-  // ✅ Copy poll link to clipboard and show ShadCN toast
+  // s Copy poll link to clipboard and show ShadCN toast
   const handleCopyLink = () => {
     navigator.clipboard.writeText(pollUrl);
     toast({

@@ -18,7 +18,6 @@ import {
 import { Card, CardContent } from "@/components/ui/card";
 import { Loader2, Plus, Trash } from "lucide-react";
 
-// ✅ Fix: Ensure empty strings are considered invalid & display errors correctly
 const validationSchema = Yup.object().shape({
   name: Yup.string()
     .trim()

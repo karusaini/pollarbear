@@ -4,6 +4,13 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
+import {
   Select,
   SelectContent,
   SelectItem,
@@ -15,7 +22,7 @@ import {
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/tooltip"; // ✅ Fix Tooltip
+} from "@/components/ui/tooltip";
 import { useToast } from "@/hooks/use-toast";
 import axios from "axios";
 import { Loader2, Plus, Share } from "lucide-react";
@@ -81,7 +88,7 @@ export default function PollsPage() {
           category: category === "All" ? "all" : category.toLowerCase(),
           sortBy,
           page,
-          limit: 10,
+          limit: 5,
           search,
         },
       });
@@ -244,6 +251,37 @@ export default function PollsPage() {
                 </CardContent>
               </Card>
             ))}
+          </div>
+        )}
+
+        {pagination.totalPages > 1 && (
+          <div className="flex justify-center mt-6">
+            <Pagination>
+              <PaginationContent>
+                <PaginationItem>
+                  <PaginationPrevious
+                    onClick={() => {
+                      if (page == 1) return;
+                      setPage((p) => Math.max(1, p - 1));
+                    }}
+                    className={page == 1 ? "opacity-80 cursor-not-allowed" : ""}
+                  />
+                </PaginationItem>
+                <PaginationItem>
+                  <PaginationNext
+                    onClick={() => {
+                      if (page == pagination.totalPages) return;
+                      setPage((p) => Math.min(pagination.totalPages, p + 1));
+                    }}
+                    className={
+                      page == pagination.totalPages
+                        ? "opacity-80 cursor-not-allowed"
+                        : ""
+                    }
+                  />
+                </PaginationItem>
+              </PaginationContent>
+            </Pagination>
           </div>
         )}
       </main>
