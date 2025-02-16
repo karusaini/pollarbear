@@ -92,7 +92,7 @@ CREATE TABLE public.poll_votes_logs (
 ### **1️⃣ Clone the Repository**
 
 ```bash
-git clone https://github.com/your-username/pollarbear.git
+git clone https://github.com/karusaini/pollarbear.git
 cd pollarbear
 ```
 
